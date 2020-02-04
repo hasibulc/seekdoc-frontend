@@ -5,36 +5,6 @@ import { Mutation } from 'react-apollo';
 
 class CreateDoctor extends Component {
 
-
-//     CREATE_DOCTOR = gql`
-//     mutation CreateDoctor($firstName: String!,  $lastName: String!, $bio: String!,
-//                           $locationLat: Floar!, $locationLong: Floar!, $locationName: String!,
-//                           $street: String!, $city: String!, 
-//                         #   $state: String!, 
-//                           $zip: Int!){
-//         createDoctor(input: {firstName: $firstName, lastName: $lastName, bio: $bio, locationLat: $locationLat,
-//                              locationLong: $locationLong, locationName: $locationName, street: $street,
-//                              city: $city, 
-//                             #  state: $state, 
-//                              zip: $zip}) {
-//             doctor {
-//                 id
-//                 firstName
-//                 lastName
-//                 bio
-//                 locationLat
-//                 locationLong
-//                 locationName
-//                 street
-//                 city
-//                 # state
-//                 zip
-//             }
-//             errors
-//         }
-//     }
-// `;
-
     CREATE_DOCTOR = gql`
         mutation CreateDoctor($firstName: String!,  
                               $lastName: String!, 
