@@ -20,6 +20,7 @@ class ThirdPage extends Component {
         return (
             <div>
                 <p>HI</p>
+                <Link to="/">Go back to the homepage</Link>
             </div>
         )
 

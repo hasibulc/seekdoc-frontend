@@ -9,14 +9,15 @@ const DOCTORS_QUERY = gql`
             id
             firstName
             lastName
+            gender
             bio
             locationLat
             locationLong
             locationName
-            street
-            city
-            # state
-            zip
+            locationStreet
+            locationCity
+            locationState
+            locationZip
         }
     }`;
 
@@ -47,14 +48,15 @@ class Doctors extends Component {
                                     <br /> ID: {doctor.id}
                                     <br /> First Name: {doctor.firstName}
                                     <br /> Last Name: {doctor.lastName}
+                                    <br /> Gender: {doctor.gender}
                                     <br /> Bio: {doctor.bio}
                                     <br /> Lat: {doctor.locationLat}
                                     <br /> Long: {doctor.locationLong}
                                     <br /> Location Name: {doctor.locationName}
-                                    <br /> Street Address: {doctor.street}
-                                    <br /> City: {doctor.city}
-                                    <br /> State: {doctor.state}
-                                    <br /> Zip Code: {doctor.zip}
+                                    <br /> Street Address: {doctor.locationStreet}
+                                    <br /> City: {doctor.locationCity}
+                                    <br /> State: {doctor.locationState}
+                                    <br /> Zip Code: {doctor.locationZip}
                                     </p>
                                 </div>)}
                         </div>
