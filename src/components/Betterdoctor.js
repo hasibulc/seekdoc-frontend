@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card'
 import CardColumns from 'react-bootstrap/CardColumns'
+// import Button from 'react-bootstrap/Button'
+import Dropdown from 'react-bootstrap/Dropdown'
+import DropdownButton from 'react-bootstrap/DropdownButton'
 // import ListGroup from 'react-bootstrap/ListGroup'
 // import Search from "../components/SearchForm"
 // import { ResponsiveEmbed } from 'react-bootstrap';
@@ -46,6 +49,50 @@ export default function Betterdoctor() {
         // .then(setUrl(`https://api.betterdoctor.com/2016-03-01/doctors?location=${coordinates.lat}%2C${coordinates.lng}%2C100&user_location=${coordinates.lat}%${coordinates.lng}&sort=distance-asc&skip=0&limit=10&user_key=d994be9b7ff6bee4ddde72b8eb9b176f`))
     }
 
+    function handleGender(e) {
+        // console.log(e.target.innerText)
+        let newUrl = ''
+        switch (e.target.innerText) {
+            case 'Male' :
+                console.log('MALE')
+
+                if (url.includes("&gender=female")) {
+                    newUrl = url.split("&gender=female")
+                    // console.log('SPLITING', newUrl)
+                    newUrl = newUrl[0] + "&gender=male&limit=10&user_key=d994be9b7ff6bee4ddde72b8eb9b176f"
+                    setUrl(newUrl)
+                } else if (url.includes("&gender=male")) {
+                    return null
+                } else {
+                    newUrl = url.split("&limit=10")
+                    newUrl = newUrl[0] + "&gender=male" + "&limit=10&user_key=d994be9b7ff6bee4ddde72b8eb9b176f"
+                    console.log(newUrl)
+                    setUrl(newUrl)                   
+                }
+                
+            break;
+            case 'Female' :
+                console.log('FEMALE')
+                
+                if (url.includes("&gender=male")) {
+                    newUrl = url.split("&gender=male")
+                    // console.log('SPLITING', newUrl)
+                    newUrl = newUrl[0] + "&gender=female&limit=10&user_key=d994be9b7ff6bee4ddde72b8eb9b176f"
+                    setUrl(newUrl)
+                } else if (url.includes("&gender=female")){
+                    return null
+                } else {
+                    newUrl = url.split("&limit=10")
+                    newUrl = newUrl[0] + "&gender=female" + "&limit=10&user_key=d994be9b7ff6bee4ddde72b8eb9b176f"
+                    console.log(newUrl)
+                    setUrl(newUrl)                   
+                }
+
+            break;
+        }
+    }
+
+
 
     console.log(doctors)
     console.log(url)
@@ -53,15 +100,19 @@ export default function Betterdoctor() {
     return (
         <div>
                 <div>
-                <h3>Enter Your Location</h3>
-                <form>
-                        <input placeholder="Street Address" value={streetAddress} onChange={e => setStreetAddress(e.target.value)} />
-                        <input placeholder="City" value={city} onChange={e => setCity(e.target.value)} />
-                        <input placeholder="State" value={stateName} onChange={e => setStateName(e.target.value)} />
-                        <button type="submit" onClick={handleSubmit}>
-                            Submit
-                        </button>
-                </form>
+                    <h3>Enter Your Location</h3>
+                    <form>
+                            <input placeholder="Street Address" value={streetAddress} onChange={e => setStreetAddress(e.target.value)} />
+                            <input placeholder="City" value={city} onChange={e => setCity(e.target.value)} />
+                            <input placeholder="State" value={stateName} onChange={e => setStateName(e.target.value)} />
+                            <button type="submit" onClick={handleSubmit}>
+                                Submit
+                            </button>
+                    </form>
+                    <DropdownButton id="dropdown-basic-button" title="Filter By Gender"  onClick={handleGender}>
+                        <Dropdown.Item eventKey="male">Male</Dropdown.Item>
+                        <Dropdown.Item eventKey="female">Female</Dropdown.Item>
+                    </DropdownButton>
                 </div>
         {/*<Search url={url} setUrl={setUrl}/>*/}
             <CardColumns>
