@@ -7,33 +7,39 @@ class CreateDoctor extends Component {
 
     CREATE_DOCTOR = gql`
         mutation CreateDoctor($firstName: String!,  
-                              $lastName: String!, 
+                              $lastName: String!,
+                              $gender: String! 
                               $bio: String!,
-                              $locationLat: Float!, 
-                              $locationLong: Float!, 
+                              $locationLat: Float, 
+                              $locationLong: Float, 
                               $locationName: String!,
-                              $street: String!, 
-                              $city: String!,
-                              $zip: Int!) {
+                              $locationStreet: String!, 
+                              $locationCity: String!,
+                              $locationState: String!,
+                              $locationZip: Int!) {
         createDoctor(input: {firstName: $firstName, 
                              lastName: $lastName, 
+                             gender: $gender,
                              bio: $bio, 
                              locationLat: $locationLat,
                              locationLong: $locationLong, 
                              locationName: $locationName, 
-                             street: $street,
-                             city: $city, 
-                             zip: $zip}) {
+                             locationStreet: $locationStreet,
+                             locationCity: $locationCity, 
+                             locationState: $locationState, 
+                             locationZip: $locationZip}) {
             doctor {
                 firstName
                 lastName
+                gender
                 bio
                 locationLat
                 locationLong
                 locationName
-                street
-                city
-                zip
+                locationStreet
+                locationCity
+                locationState
+                locationZip
             }
         }
     }`;
@@ -43,30 +49,33 @@ class CreateDoctor extends Component {
     state = {
         firstName: '',
         lastName: '',
+        gender: '',
         bio: '',
         locationLat: '',
         locationLong: '',
         locationName: '',
-        street: '',
-        city: '',
-        // state: '',
-        zip: '',
+        locationStreet: '',
+        locationCity: '',
+        locationState: '',
+        locationZip: '',
     }
 
     handleSubmit = (e, createDoctor) => {
         e.preventDefault()
         createDoctor({ variables: this.state })
         console.log(this.state)
-        this.setState ({ firstName: '',
-                         lastName: '',
-                         bio: '',
-                         locationLat: '',
-                         locationLong: '',
-                         locationName: '',
-                         street: '',
-                         city: '',
-                        //  state: '',
-                         zip: '',
+        this.setState ({
+            firstName: '',
+            lastName: '',
+            gender: '',
+            bio: '',
+            locationLat: '',
+            locationLong: '',
+            locationName: '',
+            locationStreet: '',
+            locationCity: '',
+            locationState: '',
+            locationZip: '',
         })
     }
     
@@ -87,6 +96,9 @@ class CreateDoctor extends Component {
                             <input value={this.state.lastName} placeholder="Last Name" onChange={e => this.setState({ lastName: e.target.value})}/>
                         </div>
                         <div>
+                            <input value={this.state.gender} placeholder="Gender" onChange={e => this.setState({ gender: e.target.value})}/>
+                        </div>
+                        <div>
                             <input value={this.state.bio} placeholder="Bio" onChange={e => this.setState({ bio: e.target.value})}/>
                         </div>
                         <div>
@@ -99,18 +111,16 @@ class CreateDoctor extends Component {
                             <input value={this.state.locationName} placeholder="Location Name" onChange={e => this.setState({ locationName: e.target.value})}/>
                         </div>
                         <div>
-                            <input value={this.state.street} placeholder="Street Address" onChange={e => this.setState({ street: e.target.value})}/>
+                            <input value={this.state.locationStreet} placeholder="Street Address" onChange={e => this.setState({ locationStreet: e.target.value})}/>
                         </div>
                         <div>
-                            <input value={this.state.city} placeholder="City" onChange={e => this.setState({ city: e.target.value})}/>
+                            <input value={this.state.locationCity} placeholder="City" onChange={e => this.setState({ locationCity: e.target.value})}/>
                         </div>
-                        {/*}
                         <div>
-                            <input value={this.state.state} placeholder="State" onChange={e => this.setState({ state: e.target.value})}/>
+                            <input value={this.state.locationState} placeholder="State" onChange={e => this.setState({ locationState: e.target.value})}/>
                         </div>
-                        */}
                         <div>
-                            <input value={this.state.zip} type="number" placeholder="Zip Code" onChange={e => this.setState({ zip: parseInt(e.target.value)})}/>
+                            <input value={this.state.locationZip} type="number" placeholder="Zip Code" onChange={e => this.setState({ locationZip: parseInt(e.target.value)})}/>
                         </div>
                         <button type="submit">
                             Submit

@@ -7,6 +7,7 @@
   "dependencies": {
     "apollo-boost": "^0.4.7",
     "bootstrap": "^4.4.1",
+    "dotenv": "^8.2.0",
     "gatsby": "^2.19.7",
     "gatsby-image": "^2.2.39",
     "gatsby-plugin-manifest": "^2.2.39",
@@ -23,6 +24,7 @@
     "react-apollo-form": "^0.1.8",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "^16.12.0",
+    "react-geocode": "^0.2.1",
     "react-helmet": "^5.2.1"
   },
   "devDependencies": {
