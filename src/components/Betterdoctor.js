@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card'
 import CardColumns from 'react-bootstrap/CardColumns'
 // import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button'
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 // import ListGroup from 'react-bootstrap/ListGroup'
 // import Search from "../components/SearchForm"
 // import { ResponsiveEmbed } from 'react-bootstrap';
 import GoogleMapReact from 'google-map-react';
+import Marker from 'google-map-react';
 
 
 
@@ -21,7 +24,26 @@ export default function Betterdoctor() {
     const [streetAddress, setStreetAddress] = useState('');
     const [city, setCity] = useState('');
     const [stateName, setStateName] = useState('');
+    const [browserCoords, setBrowserCoords] = useState({});
+
+
     
+
+    // if (browserCoords != '') {
+    //     setUrl(`https://api.betterdoctor.com/2016-03-01/doctors?location=${browserCoords.latitude}%2C${browserCoords.longitude}%2C100&user_location=${browserCoords.latitude}%2C${browserCoords.longitude}&skip=0&limit=10&user_key=d994be9b7ff6bee4ddde72b8eb9b176f`)
+    //     fetch(url)
+    //     .then(resp  => resp.json())
+    //     .then(data => {setDoctors(data.data)})
+    // }else{
+    //     fetch(url)
+    //     .then(resp  => resp.json())
+    //     .then(data => {setDoctors(data.data)})
+    // }
+
+    // if (browserCoords === {}){
+    //     console.log('BROWSER COORDS FOR URL')
+    //     setUrl(`https://api.betterdoctor.com/2016-03-01/doctors?location=${browserCoords.latitude}%2C${browserCoords.longitude}%2C100&user_location=${browserCoords.latitude}%2C${browserCoords.longitude}&skip=0&limit=10&user_key=d994be9b7ff6bee4ddde72b8eb9b176f`)
+    // }
 
     useEffect ( () =>{
        fetch(url)
@@ -93,11 +115,34 @@ export default function Betterdoctor() {
         }
     }
 
+    function browserLocation() {
+
+        function saveLocation(position) {
+            // return ({
+            //     lat: position.latitude,
+            //     lng: position.longitude
+            // })
+            // setBrowserCoords(position.coords)
+            // console.log(position.coords.latitude, position.coords.longitude)
+            console.log('browser location:', position.coords.latitude, position.coords.longitude)
+            setUrl(`https://api.betterdoctor.com/2016-03-01/doctors?location=${position.coords.latitude}%2C${position.coords.longitude}%2C100&user_location=${position.coords.latitude}%2C${position.coords.longitude}&skip=0&limit=10&user_key=d994be9b7ff6bee4ddde72b8eb9b176f`)
+          }
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(saveLocation)
+          } 
+        // console.log('browser location:', browserCoords.latitude, browserCoords.longitude)
+        
+    }
+    
 
 
     console.log(doctors)
     console.log(url)
     // console.log(process.env.BETTERDOCTOR_API)
+
+    // const isClient = typeof window !== 'undefined';
+
     return (
         <div>
                 <div>
@@ -110,13 +155,20 @@ export default function Betterdoctor() {
                                 Submit
                             </button>
                     </form>
+                    <ButtonToolbar>
+                    <Button variant="info" onClick={browserLocation}>
+                        Get Browser Location
+                    </Button>
                     <DropdownButton id="dropdown-basic-button" title="Filter By Gender"  onClick={handleGender}>
                         <Dropdown.Item eventKey="male">Male</Dropdown.Item>
                         <Dropdown.Item eventKey="female">Female</Dropdown.Item>
                     </DropdownButton>
+                    
+                    </ButtonToolbar>
                 </div>
         {/*<Search url={url} setUrl={setUrl}/>*/}
-            <CardColumns>
+            <div className="card div">
+            
               {doctors.map((doctor, key) => 
                   <div key={key}>
                       <Card className="text-center bg-light" border="primary">
@@ -139,27 +191,33 @@ export default function Betterdoctor() {
                               </Card.Text>
                           </Card.Body>
                           Google Maps
-                          <div style={{ height: '25vh', width: '100%' }}>
+                          <div style={{ height: '25vh', width: '100%', position: 'relative', 'margin': '0 auto'}}>
                           <GoogleMapReact 
 
                           bootstrapURLKeys={{
                             key: 'AIzaSyDowWZL-i8GKG7UXzQC78enxxnV_sG8jwo', 
                             language: 'en'
-                         }}
+                            }}
 
                             defaultCenter={{lat: 40.73, lng: -73.93}}
                             // center={{lat: 40.73, lng: -73.93}}
                             // defaultCenter={{lat: doctor.practices[0].visit_address.lat, lng: doctor.practices[0].visit_address.lon}}
                             center={{lat: doctor.practices[0].visit_address.lat, lng: doctor.practices[0].visit_address.lon}}
-                            defaultZoom={12}
+                            defaultZoom={15}
                             // onChildMouseEnter={this.onChildMouseEnter}
                             // onChildMouseLeave={this.onChildMouseLeave}
+                            >  
+                            <div
+                            className="marker"
+                            lat={doctor.practices[0].visit_address.lat}
+                            lng={doctor.practices[0].visit_address.lon}
                             />
+                            </GoogleMapReact>
                         </div>
                       </Card>
                   </div>
               )}
-            </CardColumns>
+            </div>
         </div> 
     )
 }
@@ -178,3 +236,27 @@ export default function Betterdoctor() {
 // {doctor.practices[0].visit_address.zip}
 // {doctor.practices[0].visit_address.lat}
 // {doctor.practices[0].visit_address.lon}
+
+
+
+
+
+
+// <section className="google-map">
+// <div className="map" style={{ height: '25vh', width: '100%', position: 'relative', 'margin': '0 auto'}}>
+//     { isClient && (
+//     <GoogleMapReact
+//         bootstrapURLKeys={{ key: 'AIzaSyDowWZL-i8GKG7UXzQC78enxxnV_sG8jwo' }}
+//         defaultCenter={[40.73, -73.93]}
+//         defaultZoom={14}
+//         center={{lat: doctor.practices[0].visit_address.lat, lng: doctor.practices[0].visit_address.lon}}
+//     >
+//         <div
+//         className="marker"
+//         lat={doctor.practices[0].visit_address.lat}
+//         lng={doctor.practices[0].visit_address.lon}
+//         />
+//     </GoogleMapReact>
+//     )}
+// </div>
+// </section>
