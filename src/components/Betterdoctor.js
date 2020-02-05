@@ -7,7 +7,8 @@ import DropdownButton from 'react-bootstrap/DropdownButton'
 // import ListGroup from 'react-bootstrap/ListGroup'
 // import Search from "../components/SearchForm"
 // import { ResponsiveEmbed } from 'react-bootstrap';
-require('dotenv').config()
+import GoogleMapReact from 'google-map-react';
+
 
 
 
@@ -38,7 +39,7 @@ export default function Betterdoctor() {
         // props.setUrl('https://api.betterdoctor.com/2016-03-01/doctors?location=40.707983%2C-74.010011%2C100&user_location=40.707983%2C-74.010011&sort=distance-asc&skip=0&limit=10&user_key=d994be9b7ff6bee4ddde72b8eb9b176f')
         // console.log(`https://api.betterdoctor.com/2016-03-01/doctors?location=${lat}%2C${lon}%2C100&user_location=${lat}%${lon}&sort=distance-asc&skip=0&limit=10&user_key=d994be9b7ff6bee4ddde72b8eb9b176f`)
         
-        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${streetAddress}+${city}+${stateName}&key=`)
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${streetAddress}+${city}+${stateName}&key=AIzaSyDowWZL-i8GKG7UXzQC78enxxnV_sG8jwo`)
         .then(resp => resp.json())
         .then(data => { 
             // setCoordinates(data.results[0].geometry.location)
@@ -137,6 +138,24 @@ export default function Betterdoctor() {
                                   </span>
                               </Card.Text>
                           </Card.Body>
+                          Google Maps
+                          <div style={{ height: '25vh', width: '100%' }}>
+                          <GoogleMapReact 
+
+                          bootstrapURLKeys={{
+                            key: 'AIzaSyDowWZL-i8GKG7UXzQC78enxxnV_sG8jwo', 
+                            language: 'en'
+                         }}
+
+                            defaultCenter={{lat: 40.73, lng: -73.93}}
+                            // center={{lat: 40.73, lng: -73.93}}
+                            // defaultCenter={{lat: doctor.practices[0].visit_address.lat, lng: doctor.practices[0].visit_address.lon}}
+                            center={{lat: doctor.practices[0].visit_address.lat, lng: doctor.practices[0].visit_address.lon}}
+                            defaultZoom={12}
+                            // onChildMouseEnter={this.onChildMouseEnter}
+                            // onChildMouseLeave={this.onChildMouseLeave}
+                            />
+                        </div>
                       </Card>
                   </div>
               )}
