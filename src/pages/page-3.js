@@ -18,10 +18,11 @@ class ThirdPage extends Component {
     render() {
 
         return (
-            <div>
-                <p>HI</p>
+            <Layout>
+                <h1>HI</h1>
                 <Link to="/">Go back to the homepage</Link>
-            </div>
+                <br /> <Link to="/page-4/">Search Doctor</Link> 
+            </Layout>
         )
 
     }

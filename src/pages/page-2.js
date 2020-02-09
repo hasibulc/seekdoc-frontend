@@ -9,7 +9,7 @@ import CreateDoctor from "../components/CreateDoctor"
 import Doctors from "../components/Doctors";
 
 const SecondPage = () => (
-  <div>
+  <Layout>
     <div style={{textAlign: 'center'}}>
       <CreateDoctor  />
     </div>
@@ -18,8 +18,10 @@ const SecondPage = () => (
     <hr />
     <Link to="/">Go back to the homepage</Link>
     <br />
+    <Link to="/page-4/">Search Doctor</Link> 
+    <br />
     <Link to="/page-3/">Go to page 3</Link> 
-  </div>
+  </Layout>
 )
 
 export default SecondPage

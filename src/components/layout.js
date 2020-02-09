@@ -23,9 +23,11 @@ const Layout = ({ children }) => {
     }
   `)
 
+// siteTitle={data.site.siteMetadata.title}  
+
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} />
+      <Header siteTitle={"SeekDoc"} />
       <div
         style={{
           margin: `0 auto`,

@@ -26,6 +26,26 @@ const Header = ({ siteTitle }) => (
         >
           {siteTitle}
         </Link>
+        &emsp;
+        <Link
+          to="/page-2/"
+          style={{
+            color: `white`,
+            textDecoration: `none`,
+          }}
+        >
+          {'Create Doctor'}
+        </Link>
+        &emsp;
+        <Link
+          to="/page-4/"
+          style={{
+            color: `white`,
+            textDecoration: `none`,
+          }}
+        >
+          {'Search Doctor'}
+        </Link>
       </h1>
     </div>
   </header>

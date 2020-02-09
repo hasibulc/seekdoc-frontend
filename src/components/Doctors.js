@@ -23,8 +23,6 @@ const DOCTORS_QUERY = gql`
 
 class Doctors extends Component {
 
-    
-    
     state = {
         
     }

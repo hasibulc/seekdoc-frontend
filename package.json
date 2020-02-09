@@ -7,6 +7,8 @@
   "dependencies": {
     "apollo-boost": "^0.4.7",
     "bootstrap": "^4.4.1",
+    "dotenv": "^8.2.0",
+    "fs": "0.0.1-security",
     "gatsby": "^2.19.7",
     "gatsby-image": "^2.2.39",
     "gatsby-plugin-manifest": "^2.2.39",
@@ -15,6 +17,7 @@
     "gatsby-plugin-sharp": "^2.4.3",
     "gatsby-source-filesystem": "^2.1.46",
     "gatsby-transformer-sharp": "^2.3.13",
+    "google-map-react": "^1.1.6",
     "graphql": "^14.6.0",
     "isomorphic-fetch": "^2.2.1",
     "prop-types": "^15.7.2",
@@ -23,9 +26,11 @@
     "react-apollo-form": "^0.1.8",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "^16.12.0",
+    "react-geocode": "^0.2.1",
     "react-helmet": "^5.2.1"
   },
   "devDependencies": {
+    "dotenv-webpack": "^1.7.0",
     "prettier": "^1.19.1"
   },
   "keywords": [
