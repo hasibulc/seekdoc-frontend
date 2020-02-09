@@ -1,6 +1,4 @@
-// require("dotenv").config({
-//   path: `.env.${process.env.NODE_ENV}`,
-// })
+// require('dotenv').config()
 
 module.exports = {
   siteMetadata: {
@@ -9,13 +7,6 @@ module.exports = {
     author: `@gatsbyjs`,
   },
   plugins: [
-    // {
-    //   resolve: `gatsby-source-contentful`,
-    //   options: {
-    //     spaceId: process.env.SPACE_ID,
-    //     accessToken: process.env.API_KEY,
-    //   },
-    // },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,

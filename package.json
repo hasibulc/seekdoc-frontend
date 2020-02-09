@@ -8,6 +8,7 @@
     "apollo-boost": "^0.4.7",
     "bootstrap": "^4.4.1",
     "dotenv": "^8.2.0",
+    "fs": "0.0.1-security",
     "gatsby": "^2.19.7",
     "gatsby-image": "^2.2.39",
     "gatsby-plugin-manifest": "^2.2.39",
@@ -29,6 +30,7 @@
     "react-helmet": "^5.2.1"
   },
   "devDependencies": {
+    "dotenv-webpack": "^1.7.0",
     "prettier": "^1.19.1"
   },
   "keywords": [
