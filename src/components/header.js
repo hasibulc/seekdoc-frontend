@@ -84,6 +84,9 @@ const Header = ({ siteTitle }) => (
           <NavItem>
             <NavLink as={Link} to="/search-doctor" style={{color: `white`}}>Search Doctor</NavLink>
           </NavItem>
+          <NavItem>
+            <NavLink as={Link} to="/favorite-doctor" style={{color: `white`}}>Favorite Doctor</NavLink>
+          </NavItem>
         </Nav>
         </NavbarCollapse>
       </Navbar>
