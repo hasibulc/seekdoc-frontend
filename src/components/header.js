@@ -1,6 +1,17 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+import NavItem from "react-bootstrap/NavItem"
+import NavLink from "react-bootstrap/NavLink"
+import NavbarBrand from "react-bootstrap/NavbarBrand"
+import NavbarToggle from "react-bootstrap/NavbarToggle"
+import NavbarCollapse from "react-bootstrap/NavbarCollapse"
+import icon from "../images/icon.png"
+
+
+
 
 const Header = ({ siteTitle }) => (
   <header
@@ -16,7 +27,7 @@ const Header = ({ siteTitle }) => (
         padding: `1.45rem 1.0875rem`,
       }}
     >
-      <h1 style={{ margin: 0 }}>
+      {/*<h1 style={{ margin: 0 }}>
         <Link
           to="/"
           style={{
@@ -28,7 +39,7 @@ const Header = ({ siteTitle }) => (
         </Link>
         &emsp;
         <Link
-          to="/page-2/"
+          to="/create-doctor/"
           style={{
             color: `white`,
             textDecoration: `none`,
@@ -38,7 +49,7 @@ const Header = ({ siteTitle }) => (
         </Link>
         &emsp;
         <Link
-          to="/page-4/"
+          to="/search-doctor/"
           style={{
             color: `white`,
             textDecoration: `none`,
@@ -46,7 +57,37 @@ const Header = ({ siteTitle }) => (
         >
           {'Search Doctor'}
         </Link>
-      </h1>
+        </h1>*/}
+      {/*<nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/search-doctor">Page4</Link>
+            </li>
+          </ul>
+      </nav>*/}
+      <Navbar>
+      <NavbarBrand style={{color: `white`}} as={Link} to="/">SeekDoc
+        <img alt="logo" src={icon} width="30" height="30"/>
+      </NavbarBrand>
+      <NavbarToggle aria-controls="basic-navbar-nav" />
+      <NavbarCollapse id="basic-navbar-nav">
+        <Nav fill variant="tabs" className="text-center ml-auto">
+          <NavItem>
+            <NavLink as={Link} to="/" style={{color: `white`}}>Home</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink as={Link} to="/create-doctor" style={{color: `white`}}>Create Doctor</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink as={Link} to="/search-doctor" style={{color: `white`}}>Search Doctor</NavLink>
+          </NavItem>
+        </Nav>
+        </NavbarCollapse>
+      </Navbar>
+      
     </div>
   </header>
 )

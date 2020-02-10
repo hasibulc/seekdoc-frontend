@@ -110,6 +110,7 @@ export default function Betterdoctor() {
         // console.log('browser location:', browserCoords.latitude, browserCoords.longitude)
         
     }
+    
 
     // console.log(doctors)
     // console.log(url)

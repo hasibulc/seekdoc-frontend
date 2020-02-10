@@ -18,7 +18,7 @@ const SecondPage = () => (
     <hr />
     <Link to="/">Go back to the homepage</Link>
     <br />
-    <Link to="/page-4/">Search Doctor</Link> 
+    <Link to="/search-doctor/">Search Doctor</Link> 
     <br />
     <Link to="/page-3/">Go to page 3</Link> 
   </Layout>
