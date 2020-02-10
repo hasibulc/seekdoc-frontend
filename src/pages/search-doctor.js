@@ -8,13 +8,12 @@ import SEO from "../components/seo"
 
 const ThirdPage = () => (
     <Layout>
-    
-    <div>
-        <h1>Search Doctors</h1>
-        <hr />
-            <Betterdoctor />
-        <Link to="/">Go back to the homepage</Link>
-    </div>
+        <div>
+            <h1>Search Doctors</h1>
+            <hr />
+                <Betterdoctor />
+            <Link to="/">Go back to the homepage</Link>
+        </div>
     </Layout>
 )
 

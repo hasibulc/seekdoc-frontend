@@ -26,11 +26,11 @@ const IndexPage = () => (
   
     <div>
       <Doctors />  
-      <Link to="/page-2/">Create Doctor</Link> 
+      <Link to="/create-doctor/">Create Doctor</Link> 
       <br />
       <Link to="/page-3/">Go to page 3</Link> 
       <br />
-      <Link to="/page-4/">Search Doctor</Link> 
+      <Link to="/search-doctor/">Search Doctor</Link> 
     </div>
 
   </Layout>

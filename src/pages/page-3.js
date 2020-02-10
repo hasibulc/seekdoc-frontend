@@ -21,7 +21,7 @@ class ThirdPage extends Component {
             <Layout>
                 <h1>HI</h1>
                 <Link to="/">Go back to the homepage</Link>
-                <br /> <Link to="/page-4/">Search Doctor</Link> 
+                <br /> <Link to="/search-doctor/">Search Doctor</Link> 
             </Layout>
         )
 
