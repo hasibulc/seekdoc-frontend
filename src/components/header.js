@@ -23,7 +23,7 @@ const Header = ({ siteTitle }) => (
     <div
       style={{
         margin: `0 auto`,
-        maxWidth: 960,
+        maxWidth: 1400,
         padding: `1.45rem 1.0875rem`,
       }}
     >
@@ -69,23 +69,26 @@ const Header = ({ siteTitle }) => (
           </ul>
       </nav>*/}
       <Navbar>
-      <NavbarBrand style={{color: `white`}} as={Link} to="/">SeekDoc
-        <img alt="logo" src={icon} width="30" height="30"/>
+      <NavbarBrand style={{color: `white`, fontSize: '50px'}} as={Link} to="/">SeekDoc
+        <img alt="logo" src={icon} width="50" height="50"/>
       </NavbarBrand>
       <NavbarToggle aria-controls="basic-navbar-nav" />
       <NavbarCollapse id="basic-navbar-nav">
         <Nav fill variant="tabs" className="text-center ml-auto">
           <NavItem>
-            <NavLink as={Link} to="/" style={{color: `white`}}>Home</NavLink>
+            <NavLink as={Link} to="/" style={{color: 'white', fontSize: '20px'}}>Search Doctor</NavLink>
+          </NavItem>
+          {/*<NavItem>
+            <NavLink as={Link} to="/create-doctor" style={{color: 'white', fontSize: '20px'}}>Create Doctor</NavLink>
+          </NavItem>*/}
+          {/*<NavItem>
+            <NavLink as={Link} to="/search-doctor" style={{color: 'white', fontSize: '20px'}} >Search Doctor</NavLink>
+          </NavItem>*/}
+          <NavItem>
+            <NavLink as={Link} to="/favorite-doctor" style={{color: 'white', fontSize: '20px'}}>Favorite Doctor</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink as={Link} to="/create-doctor" style={{color: `white`}}>Create Doctor</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink as={Link} to="/search-doctor" style={{color: `white`}}>Search Doctor</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink as={Link} to="/favorite-doctor" style={{color: `white`}}>Favorite Doctor</NavLink>
+            <NavLink as={Link} to="/user-favorites" style={{color: 'white', fontSize: '20px'}}>My Favorites</NavLink>
           </NavItem>
         </Nav>
         </NavbarCollapse>

@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 import Betterdoctor from "../components/Betterdoctor"
-import Ratedoctor from "../components/Ratedoctor"
+import FaveDoctor from "../components/FaveDoctor"
 import Layout from "../components/layout"
 
 const FavoriteDoctor = () => (
@@ -9,7 +9,7 @@ const FavoriteDoctor = () => (
         <div>
             <h1>Rate and Review Doctors</h1>
             <hr />
-                <Ratedoctor />
+                <FaveDoctor />
             <Link to="/">Go back to the homepage</Link>
         </div>
     </Layout>

@@ -37,7 +37,7 @@ class Doctors extends Component {
                 {({ loading, error, data }) => {
                     if (loading) return <div>Fetching..</div>
                     if (error) return <div>Error!</div>
-        
+
                     return (
                         <div>
                             {data.allDoctors.map((doctor, key) => 

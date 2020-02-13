@@ -6,6 +6,11 @@ import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import GoogleMapReact from 'google-map-react';
+import gql from 'graphql-tag';
+import { Mutation } from 'react-apollo';
+
+import male from "../images/male_doctor_icon.png"
+import female from "../images/female_doctor_icon.png"
 
 export default function Betterdoctor() {
 
@@ -16,6 +21,8 @@ export default function Betterdoctor() {
     const [city, setCity] = useState('');
     const [stateName, setStateName] = useState('');
     const [browserCoords, setBrowserCoords] = useState({});
+    const [showFaveForm, setShowFaveForm] = useState(false);
+    // const [faveButtonState, setFaveButtonState] = useState(true);
 
     useEffect ( () =>{
        fetch(url)
@@ -101,6 +108,103 @@ export default function Betterdoctor() {
         return <div className="SuperAwesomePin"></div>
     }
 
+    function handleFave(e, doctor, createUserFavorite, faveButtonState) {
+        // const [faveDoctor, setFaveDoctor] = useState({})
+        const docObj = {
+            userId: 1,
+            doctorFn: doctor.profile.first_name,
+            doctorLn: doctor.profile.last_name,
+            gender: doctor.profile.gender,
+            bio: doctor.profile.bio,
+            locationLat: doctor.practices[0].visit_address.lat,
+            locationLong: doctor.practices[0].visit_address.lon,
+            locationName: capitalizeName(doctor.practices[0].name),
+            locationStreet: doctor.practices[0].visit_address.street,
+            locationCity: doctor.practices[0].visit_address.city,
+            locationState: doctor.practices[0].visit_address.state,
+            locationZip: parseInt(doctor.practices[0].visit_address.zip),
+            rating: null,
+            review: null,
+        }
+        // console.log(doctor)
+        // console.log(e.target.innerText)
+        // console.log(docObj)
+        if (faveButtonState) {
+            createUserFavorite({ variables: docObj })
+            // setFaveButtonState(!faveButtonState)
+        } 
+        // else {
+        //     setFaveButtonState(!faveButtonState)
+        // }
+        console.log(faveButtonState)
+        // setFaveButtonState(!faveButtonState)
+    }
+
+    function handleGender(gender) {
+        if (gender == 'male') {
+            return (
+                <img alt="male" src={male} width="30" height="30"/>
+            )
+        } else {
+            return (
+                <img alt="female" src={female} width="30" height="30"/>
+            )
+        }
+    }
+
+    const FAVE_DOCTOR = gql`
+        mutation CreateUserFavorite(
+                              $userId: Int!,  
+                              $doctorFn: String!,  
+                              $doctorLn: String!,
+                              $gender: String! 
+                              $bio: String!,
+                              $locationLat: Float, 
+                              $locationLong: Float, 
+                              $locationName: String!,
+                              $locationStreet: String!, 
+                              $locationCity: String!,
+                              $locationState: String!,
+                              $locationZip: Int!, 
+                              $rating: Int, 
+                              $review: String,
+                            ) 
+                            {
+                        createUserFavorite(input: {
+                            userId: $userId, 
+                            doctorFn: $doctorFn, 
+                            doctorLn: $doctorLn, 
+                            gender: $gender,
+                            bio: $bio, 
+                            locationLat: $locationLat,
+                            locationLong: $locationLong, 
+                            locationName: $locationName, 
+                            locationStreet: $locationStreet,
+                            locationCity: $locationCity, 
+                            locationState: $locationState, 
+                            locationZip: $locationZip,
+                            rating: $rating,
+                            review: $review,
+                            }) {
+            userFavorite {
+                userId
+                doctorFn
+                doctorLn
+                gender
+                bio
+                locationLat
+                locationLong
+                locationName
+                locationStreet
+                locationCity
+                locationState
+                locationZip
+                rating
+                review
+            }
+        }
+    }`;
+
     return (
         <div>
             <div>
@@ -132,7 +236,10 @@ export default function Betterdoctor() {
                                     {doctor.profile.first_name} {doctor.profile.last_name}
                                 </Card.Title>
                                 <Card.Subtitle>
-                                    {doctor.profile.gender}
+                                    {handleGender(doctor.profile.gender)}
+                                </Card.Subtitle>
+                                <Card.Subtitle>
+                                    {doctor.profile.bio}
                                 </Card.Subtitle>
                                 <Card.Text>
                                     <br />{capitalizeName(doctor.practices[0].name)}
@@ -143,7 +250,7 @@ export default function Betterdoctor() {
                                     </span>
                                 </Card.Text>
                             </Card.Body>
-                            Google Maps
+                            {/*Google Maps*/}
                             <div style={{ height: '25vh', width: '100%', position: 'relative', 'margin': '0 auto'}}>
                                 <GoogleMapReact 
                                 bootstrapURLKeys={{
@@ -157,15 +264,55 @@ export default function Betterdoctor() {
                                     <Marker lat={doctor.practices[0].visit_address.lat} lng={doctor.practices[0].visit_address.lon} text={{text: 'text'}}/>
                                 </GoogleMapReact>
                             </div>
-                            FAVORITE ICONS
-                            <ButtonToolbar>
-                                <Button variant="danger" >
-                                    Rate
-                                </Button>
-                                <Button variant="success" >
-                                    Review
-                                </Button>
-                            </ButtonToolbar>
+                            {/*FAVORITE ICONS TEXT*/}
+            
+                            <Mutation mutation={FAVE_DOCTOR}>
+                            {createUserFaveDoctorMutation => {
+
+                                // const [faveButtonState, setFaveButtonState] = useState(true);
+                                let faveButtonState = true
+
+                                // faveButtonState ? 
+                                // <ButtonToolbar>
+                                //     <Button variant="success" onClick={(e) => handleFave(e, doctor, createUserFaveDoctorMutation)}>
+                                //         Favorite
+                                //     </Button>
+                                // </ButtonToolbar> : 
+                                // <ButtonToolbar>
+                                // <Button variant="danger" onClick={(e) => handleFave(e, doctor, createUserFaveDoctorMutation)}>
+                                //     Unfavorite
+                                // </Button>
+                                // </ButtonToolbar>
+                                if (faveButtonState) {
+                                    
+                                    return(
+                                    <ButtonToolbar>
+                                        <Button variant="success" onClick={(e) => handleFave(e, doctor, createUserFaveDoctorMutation, faveButtonState)}>
+                                           Favorite {faveButtonState = !faveButtonState}
+                                        </Button>
+                                     </ButtonToolbar> 
+                                    )
+                                } else {
+                                    return(
+                                    <ButtonToolbar>
+                                        <Button variant="danger" onClick={(e) => handleFave(e, doctor, createUserFaveDoctorMutation, faveButtonState)}>
+                                           Unfavorite
+                                        </Button>
+                                     </ButtonToolbar> 
+                                    )
+                                }
+                
+                            }}
+                            </Mutation>
+                             
+                            {/*{showFaveForm ? 
+                                <span>
+                                    {doctor.profile.first_name} {doctor.profile.last_name}
+                                    {capitalizeName(doctor.practices[0].name)}
+                                    {doctor.practices[0].visit_address.street}
+                                    {doctor.practices[0].visit_address.city}, {doctor.practices[0].visit_address.state} {doctor.practices[0].visit_address.zip}
+                                 </span>
+                            : null}*/}
                         </Card>
                      </div>
                 )}

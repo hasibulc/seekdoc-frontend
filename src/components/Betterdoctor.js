@@ -12,6 +12,9 @@ import DropdownButton from 'react-bootstrap/DropdownButton'
 import GoogleMapReact from 'google-map-react';
 import Marker from 'google-map-react';
 
+import male from "../images/male_doctor_icon.png"
+import female from "../images/female_doctor_icon.png"
+
 // import dotenv from 'dotenv'
 // dotenv.config();
 
@@ -130,6 +133,18 @@ export default function Betterdoctor() {
         return <div className="SuperAwesomePin"></div>
     }
 
+    function handleGender(gender) {
+        if (gender == 'male') {
+            return (
+                <img alt="male" src={male} width="30" height="30"/>
+            )
+        } else {
+            return (
+                <img alt="female" src={female} width="30" height="30"/>
+            )
+        }
+    }
+
     return (
         <div>
                 <div>
@@ -164,7 +179,10 @@ export default function Betterdoctor() {
                                   {doctor.profile.first_name} {doctor.profile.last_name}
                               </Card.Title>
                               <Card.Subtitle>
-                                  {doctor.profile.gender}
+                                  {handleGender(doctor.profile.gender)}
+                              </Card.Subtitle>
+                              <Card.Subtitle>
+                                  {doctor.profile.bio}
                               </Card.Subtitle>
                               <Card.Text>
                                   <br />{capitalizeName(doctor.practices[0].name)}
@@ -172,12 +190,12 @@ export default function Betterdoctor() {
                                   <span>
                                       <br/>{doctor.practices[0].visit_address.street}
                                       <br/>{doctor.practices[0].visit_address.city}, {doctor.practices[0].visit_address.state} {doctor.practices[0].visit_address.zip}
-                                      <br/>{doctor.practices[0].visit_address.lat}
-                                      <br/>{doctor.practices[0].visit_address.lon}
+                                      {/*<br/>{doctor.practices[0].visit_address.lat}
+                                        <br/>{doctor.practices[0].visit_address.lon}*/}
                                   </span>
                               </Card.Text>
                           </Card.Body>
-                          Google Maps
+                          {/*Google Maps*/}
                           <div style={{ height: '25vh', width: '100%', position: 'relative', 'margin': '0 auto'}}>
                           <GoogleMapReact 
 
