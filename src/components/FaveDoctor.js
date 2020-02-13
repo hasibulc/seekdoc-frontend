@@ -140,7 +140,7 @@ export default function Betterdoctor() {
         // setFaveButtonState(!faveButtonState)
     }
 
-    function handleGender(gender) {
+    function handleGenderIcon(gender) {
         if (gender == 'male') {
             return (
                 <img alt="male" src={male} width="30" height="30"/>
@@ -236,7 +236,7 @@ export default function Betterdoctor() {
                                     {doctor.profile.first_name} {doctor.profile.last_name}
                                 </Card.Title>
                                 <Card.Subtitle>
-                                    {handleGender(doctor.profile.gender)}
+                                    {handleGenderIcon(doctor.profile.gender)}
                                 </Card.Subtitle>
                                 <Card.Subtitle>
                                     {doctor.profile.bio}

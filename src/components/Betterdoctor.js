@@ -71,7 +71,6 @@ export default function Betterdoctor() {
                     // console.log(newUrl)
                     setUrl(newUrl)                   
                 }
-                
             break;
             case 'Female' :
                 console.log('FEMALE')
@@ -89,9 +88,42 @@ export default function Betterdoctor() {
                     // console.log(newUrl)
                     setUrl(newUrl)                   
                 }
-
             break;
         }
+
+        // if (e.target.innerText == 'Male') {
+        //     console.log('MALE')
+
+        //         if (url.includes("&gender=female")) {
+        //             newUrl = url.split("&gender=female")
+        //             // console.log('SPLITING', newUrl)
+        //             newUrl = newUrl[0] + `&gender=male&limit=10&user_key=${process.env.BD_API}`
+        //             setUrl(newUrl)
+        //         } else if (url.includes("&gender=male")) {
+        //             return null
+        //         } else {
+        //             newUrl = url.split("&limit=10")
+        //             newUrl = newUrl[0] + "&gender=male" + `&limit=10&user_key=${process.env.BD_API}`
+        //             // console.log(newUrl)
+        //             setUrl(newUrl)                   
+        //         }
+        // } else if (e.target.innerText == 'Female') {
+        //     console.log('FEMALE')
+                
+        //         if (url.includes("&gender=male")) {
+        //             newUrl = url.split("&gender=male")
+        //             // console.log('SPLITING', newUrl)
+        //             newUrl = newUrl[0] + `&gender=female&limit=10&user_key=${process.env.BD_API}`
+        //             setUrl(newUrl)
+        //         } else if (url.includes("&gender=female")){
+        //             return null
+        //         } else {
+        //             newUrl = url.split("&limit=10")
+        //             newUrl = newUrl[0] + `&gender=female" + "&limit=10&user_key=${process.env.BD_API}`
+        //             // console.log(newUrl)
+        //             setUrl(newUrl)                   
+        //         }
+        // }
     }
 
     function browserLocation() {
@@ -133,7 +165,7 @@ export default function Betterdoctor() {
         return <div className="SuperAwesomePin"></div>
     }
 
-    function handleGender(gender) {
+    function handleGenderIcon(gender) {
         if (gender == 'male') {
             return (
                 <img alt="male" src={male} width="30" height="30"/>
@@ -161,7 +193,7 @@ export default function Betterdoctor() {
                     <Button variant="info" onClick={browserLocation}>
                         Auto Location
                     </Button>
-                    <DropdownButton id="dropdown-basic-button" title="Filter By Gender"  onClick={handleGender}>
+                    <DropdownButton id="dropdown-basic-button" title="Filter By Gender" onClick={handleGender}>
                         <Dropdown.Item eventKey="male">Male</Dropdown.Item>
                         <Dropdown.Item eventKey="female">Female</Dropdown.Item>
                     </DropdownButton>
@@ -179,7 +211,7 @@ export default function Betterdoctor() {
                                   {doctor.profile.first_name} {doctor.profile.last_name}
                               </Card.Title>
                               <Card.Subtitle>
-                                  {handleGender(doctor.profile.gender)}
+                                  {handleGenderIcon(doctor.profile.gender)}
                               </Card.Subtitle>
                               <Card.Subtitle>
                                   {doctor.profile.bio}

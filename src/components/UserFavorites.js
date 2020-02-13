@@ -27,7 +27,7 @@ export default function UserFavorites() {
             }
         }`;
 
-    function handleGender(gender) {
+    function handleGenderIcon(gender) {
         if (gender == 'male') {
             return (
                 <img alt="male" src={male} width="30" height="30"/>
@@ -57,7 +57,7 @@ export default function UserFavorites() {
                                             {doctor.doctorFn} {doctor.doctorLn}
                                         </Card.Title>
                                         <Card.Subtitle>
-                                            {handleGender(doctor.gender)}
+                                            {handleGenderIcon(doctor.gender)}
                                         </Card.Subtitle>
                                         <Card.Subtitle>
                                             {doctor.bio}
