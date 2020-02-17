@@ -1,40 +1,68 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import gql from 'graphql-tag';
 import Card from 'react-bootstrap/Card'
 import GoogleMapReact from 'google-map-react'
 import { Query } from 'react-apollo'
+import { useQuery } from '@apollo/react-hooks';
 import male from "../images/male_doctor_icon.png"
 import female from "../images/female_doctor_icon.png"
+
+let USER_FAVORITES_QUERY
 
 export default function UserFavorites() {
 
     const USER_FAVORITES_QUERY = gql`
-        query {
-            allUserFavorite {
-                doctorFn
-                doctorLn
-                gender
-                bio
-                locationLat
-                locationLong
-                locationName
-                locationStreet
-                locationCity
-                locationState
-                locationZip
-                rating
-                review
-            }
-        }`;
+            query {
+                allUserFavorite {
+                    doctorFn
+                    doctorLn
+                    gender
+                    bio
+                    locationLat
+                    locationLong
+                    locationName
+                    locationStreet
+                    locationCity
+                    locationState
+                    locationZip
+                    rating
+                    review
+                }
+            }`;
 
+    
+    
+    // useEffect( (USER_FAVORITES_QUERY) =>{
+    //     USER_FAVORITES_QUERY = gql`
+    //         query {
+    //             allUserFavorite {
+    //                 doctorFn
+    //                 doctorLn
+    //                 gender
+    //                 bio
+    //                 locationLat
+    //                 locationLong
+    //                 locationName
+    //                 locationStreet
+    //                 locationCity
+    //                 locationState
+    //                 locationZip
+    //                 rating
+    //                 review
+    //             }
+    //         }`;
+    //  });
+
+    
+     
     function handleGenderIcon(gender) {
-        if (gender == 'male') {
+        if (gender === 'male') {
             return (
-                <img alt="male" src={male} width="30" height="30"/>
+                <img alt="male" src={male} width="40" height="40"/>
             )
         } else {
             return (
-                <img alt="female" src={female} width="30" height="30"/>
+                <img alt="female" src={female} width="40" height="40"/>
             )
         }
     }

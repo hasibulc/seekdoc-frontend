@@ -28,6 +28,8 @@ const client = new ApolloClient({
   fetch
 });
 
+// const onServiceWorkerUpdateReady = () => window.location.reload();
+
 // ReactDOM.render(
 //   <ApolloProvider client={client}>
 //     {element}

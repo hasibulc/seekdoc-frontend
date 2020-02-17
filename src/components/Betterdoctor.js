@@ -168,11 +168,11 @@ export default function Betterdoctor() {
     function handleGenderIcon(gender) {
         if (gender == 'male') {
             return (
-                <img alt="male" src={male} width="30" height="30"/>
+                <img alt="male" src={male} width="40" height="40"/>
             )
         } else {
             return (
-                <img alt="female" src={female} width="30" height="30"/>
+                <img alt="female" src={female} width="40" height="40"/>
             )
         }
     }

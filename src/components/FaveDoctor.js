@@ -8,9 +8,12 @@ import DropdownButton from 'react-bootstrap/DropdownButton'
 import GoogleMapReact from 'google-map-react';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
+import { Query } from 'react-apollo';
 
 import male from "../images/male_doctor_icon.png"
 import female from "../images/female_doctor_icon.png"
+
+import { Link } from "gatsby"
 
 export default function Betterdoctor() {
 
@@ -143,11 +146,11 @@ export default function Betterdoctor() {
     function handleGenderIcon(gender) {
         if (gender == 'male') {
             return (
-                <img alt="male" src={male} width="30" height="30"/>
+                <img alt="male" src={male} width="40" height="40"/>
             )
         } else {
             return (
-                <img alt="female" src={female} width="30" height="30"/>
+                <img alt="female" src={female} width="40" height="40"/>
             )
         }
     }
@@ -205,8 +208,30 @@ export default function Betterdoctor() {
         }
     }`;
 
+    const USER_FAVORITES_QUERY = gql`
+        query {
+            allUserFavorite {
+                doctorFn
+                doctorLn
+                gender
+                bio
+                locationLat
+                locationLong
+                locationName
+                locationStreet
+                locationCity
+                locationState
+                locationZip
+                rating
+                review
+            }
+        }`;
+
+
+
     return (
         <div>
+            {/*<Link to="/user-favorites/">User Favorites</Link>*/}
             <div>
                 <h3>Enter Your Location</h3>
                 <form>
@@ -286,9 +311,9 @@ export default function Betterdoctor() {
                                 if (faveButtonState) {
                                     
                                     return(
-                                    <ButtonToolbar>
+                                    <ButtonToolbar >
                                         <Button variant="success" onClick={(e) => handleFave(e, doctor, createUserFaveDoctorMutation, faveButtonState)}>
-                                           Favorite {faveButtonState = !faveButtonState}
+                                           Favorite 
                                         </Button>
                                      </ButtonToolbar> 
                                     )
@@ -304,6 +329,17 @@ export default function Betterdoctor() {
                 
                             }}
                             </Mutation>
+
+                            <Query query={USER_FAVORITES_QUERY}>
+                                {({ loading, error, data }) => {
+                                    if (loading) return <div>Fetching..</div>
+                                    if (error) return <div>Error!</div>
+                                    console.log(data)
+                                    
+                                    return(   <div>
+                                        </div>
+                                )}}
+                            </Query>
                              
                             {/*{showFaveForm ? 
                                 <span>

@@ -4,10 +4,12 @@ import Betterdoctor from "../components/Betterdoctor"
 import FaveDoctor from "../components/FaveDoctor"
 import Layout from "../components/layout"
 
+
+
 const FavoriteDoctor = () => (
     <Layout>
         <div>
-            <h1>Rate and Review Doctors</h1>
+            <h1>Favorite Doctors</h1>
             <hr />
                 <FaveDoctor />
             <Link to="/">Go back to the homepage</Link>
