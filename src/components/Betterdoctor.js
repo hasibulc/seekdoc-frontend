@@ -12,6 +12,9 @@ import DropdownButton from 'react-bootstrap/DropdownButton'
 import GoogleMapReact from 'google-map-react';
 import Marker from 'google-map-react';
 
+import male from "../images/male_doctor_icon.png"
+import female from "../images/female_doctor_icon.png"
+
 // import dotenv from 'dotenv'
 // dotenv.config();
 
@@ -68,7 +71,6 @@ export default function Betterdoctor() {
                     // console.log(newUrl)
                     setUrl(newUrl)                   
                 }
-                
             break;
             case 'Female' :
                 console.log('FEMALE')
@@ -86,9 +88,42 @@ export default function Betterdoctor() {
                     // console.log(newUrl)
                     setUrl(newUrl)                   
                 }
-
             break;
         }
+
+        // if (e.target.innerText == 'Male') {
+        //     console.log('MALE')
+
+        //         if (url.includes("&gender=female")) {
+        //             newUrl = url.split("&gender=female")
+        //             // console.log('SPLITING', newUrl)
+        //             newUrl = newUrl[0] + `&gender=male&limit=10&user_key=${process.env.BD_API}`
+        //             setUrl(newUrl)
+        //         } else if (url.includes("&gender=male")) {
+        //             return null
+        //         } else {
+        //             newUrl = url.split("&limit=10")
+        //             newUrl = newUrl[0] + "&gender=male" + `&limit=10&user_key=${process.env.BD_API}`
+        //             // console.log(newUrl)
+        //             setUrl(newUrl)                   
+        //         }
+        // } else if (e.target.innerText == 'Female') {
+        //     console.log('FEMALE')
+                
+        //         if (url.includes("&gender=male")) {
+        //             newUrl = url.split("&gender=male")
+        //             // console.log('SPLITING', newUrl)
+        //             newUrl = newUrl[0] + `&gender=female&limit=10&user_key=${process.env.BD_API}`
+        //             setUrl(newUrl)
+        //         } else if (url.includes("&gender=female")){
+        //             return null
+        //         } else {
+        //             newUrl = url.split("&limit=10")
+        //             newUrl = newUrl[0] + `&gender=female" + "&limit=10&user_key=${process.env.BD_API}`
+        //             // console.log(newUrl)
+        //             setUrl(newUrl)                   
+        //         }
+        // }
     }
 
     function browserLocation() {
@@ -130,6 +165,18 @@ export default function Betterdoctor() {
         return <div className="SuperAwesomePin"></div>
     }
 
+    function handleGenderIcon(gender) {
+        if (gender == 'male') {
+            return (
+                <img alt="male" src={male} width="40" height="40"/>
+            )
+        } else {
+            return (
+                <img alt="female" src={female} width="40" height="40"/>
+            )
+        }
+    }
+
     return (
         <div>
                 <div>
@@ -146,7 +193,7 @@ export default function Betterdoctor() {
                     <Button variant="info" onClick={browserLocation}>
                         Auto Location
                     </Button>
-                    <DropdownButton id="dropdown-basic-button" title="Filter By Gender"  onClick={handleGender}>
+                    <DropdownButton id="dropdown-basic-button" title="Filter By Gender" onClick={handleGender}>
                         <Dropdown.Item eventKey="male">Male</Dropdown.Item>
                         <Dropdown.Item eventKey="female">Female</Dropdown.Item>
                     </DropdownButton>
@@ -164,7 +211,10 @@ export default function Betterdoctor() {
                                   {doctor.profile.first_name} {doctor.profile.last_name}
                               </Card.Title>
                               <Card.Subtitle>
-                                  {doctor.profile.gender}
+                                  {handleGenderIcon(doctor.profile.gender)}
+                              </Card.Subtitle>
+                              <Card.Subtitle>
+                                  {doctor.profile.bio}
                               </Card.Subtitle>
                               <Card.Text>
                                   <br />{capitalizeName(doctor.practices[0].name)}
@@ -172,12 +222,12 @@ export default function Betterdoctor() {
                                   <span>
                                       <br/>{doctor.practices[0].visit_address.street}
                                       <br/>{doctor.practices[0].visit_address.city}, {doctor.practices[0].visit_address.state} {doctor.practices[0].visit_address.zip}
-                                      <br/>{doctor.practices[0].visit_address.lat}
-                                      <br/>{doctor.practices[0].visit_address.lon}
+                                      {/*<br/>{doctor.practices[0].visit_address.lat}
+                                        <br/>{doctor.practices[0].visit_address.lon}*/}
                                   </span>
                               </Card.Text>
                           </Card.Body>
-                          Google Maps
+                          {/*Google Maps*/}
                           <div style={{ height: '25vh', width: '100%', position: 'relative', 'margin': '0 auto'}}>
                           <GoogleMapReact 
 

@@ -5,6 +5,9 @@ import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
 import Doctors from "../components/Doctors"
+import Betterdoctor from "../components/Betterdoctor"
+
+
 
 //Apollo
 // import { ApolloProvider } from 'react-apollo';
@@ -25,12 +28,15 @@ const IndexPage = () => (
   <Layout>
   
     <div>
-      <Doctors />  
+      {/*<Doctors />  
       <Link to="/create-doctor/">Create Doctor</Link> 
       <br />
       <Link to="/page-3/">Go to page 3</Link> 
       <br />
-      <Link to="/search-doctor/">Search Doctor</Link> 
+      <Link to="/search-doctor/">Search Doctor</Link>*/}
+      <h1>Search Doctors</h1>
+      <hr />
+        <Betterdoctor />
     </div>
 
   </Layout>
